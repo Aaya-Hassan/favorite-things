@@ -5,12 +5,12 @@ from django.urls import include, path
 from django.conf.urls.static import static
 from django.contrib import admin
 
-schema_view = get_schema_view(title='App API')
+schema_view = get_schema_view(title='favorites API')
 
 
 urlpatterns = [
     path(settings.ADMIN_URL, admin.site.urls),
-    path(r'', include(('app.urls', 'apps'), namespace='apps')),
+    path(r'', include(('app.favorites.urls', 'favorites'), namespace='favorites')),
     path(r'schema/', schema_view),
 ] + static(
     settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
