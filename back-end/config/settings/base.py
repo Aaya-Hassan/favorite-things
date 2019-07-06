@@ -4,7 +4,7 @@ Base settings to build other settings files upon.
 
 import environ
 
-ROOT_DIR = environ.Path(__file__) - 3
+ROOT_DIR = environ.Path(__file__)
 APPS_DIR = ROOT_DIR.path('app')
 
 env = environ.Env()
@@ -31,9 +31,15 @@ USE_TZ = True
 # ------------------------------------------------------------------------------
 
 DATABASES = {
-    'default': env.db('DATABASE_URL'),
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'dreamteam_db',
+        'USER': 'root',
+        'PASSWORD': 'AAsaraAA1',
+        'HOST': 'localhost',
+        'PORT': '',
+    }
 }
-
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 
 # URLS
@@ -50,6 +56,7 @@ DJANGO_APPS = [
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 'django.contrib.humanize', # Handy template tags
     'django.contrib.admin',
 ]
 THIRD_PARTY_APPS = [
@@ -57,7 +64,7 @@ THIRD_PARTY_APPS = [
     'corsheaders',
 ]
 LOCAL_APPS = [
-    'app',
+    'app.favorites',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -149,6 +156,8 @@ TEMPLATES = [
     },
 ]
 
+
+
 # EMAIL
 # ------------------------------------------------------------------------------
 EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND', default='django.core.mail.backends.smtp.EmailBackend')
@@ -158,7 +167,7 @@ EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND', default='django.core.mail.backends.s
 # Django Admin URL.
 ADMIN_URL = 'admin/'
 ADMINS = [
-    ("""aaya hassan""", 'aayahassan94@gmail.com'),
+    ("""Aaya Hassan""", 'aayahassan94@gmail.com'),
 ]
 MANAGERS = ADMINS
 
